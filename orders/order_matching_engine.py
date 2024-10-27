@@ -13,15 +13,15 @@ class OrderMatchingEngine:
         self.order_book = OrderBook()
         self.transactions = []
 
-    def add_order(self, order: Order):
+    def add_order(self, order: Order) -> None:
         self.order_book.add_order(order)
 
-    def remove_order(self, order: Order):
+    def remove_order(self, order: Order) -> None:
         success = self.order_book.remove_order(order)
         if not success:
             print("Invalid order.")
 
-    def match_orders(self):
+    def match_orders(self) -> None:
         if self.order_book.buy_orders and self.order_book.sell_orders:
             highest_buy_price, buy_order = self.order_book.buy_orders[0]
             lowest_sell_price, sell_order = self.order_book.sell_orders[0]
@@ -59,7 +59,7 @@ class OrderMatchingEngine:
                 if sell_order.quantity == 0:
                     self.order_book.remove_order(sell_order)
 
-    def start(self):
+    def start(self) -> None:
 
         self.running = True
         try:
@@ -76,6 +76,6 @@ class OrderMatchingEngine:
             print("Order matching engine stopped.")
             self.running = False
 
-    def stop(self):
+    def stop(self) -> None:
         self.running = False
         print("Order matching engine stopped.")

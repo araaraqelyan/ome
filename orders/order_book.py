@@ -12,7 +12,7 @@ class OrderBook:
         self.sell_orders: List[Tuple[float, Order]] = [] # min-heap
         self.timestamp = []
 
-    def add_order(self, order: Order):
+    def add_order(self, order: Order) -> None:
         if order.side == Side.BUY:
             heapq.heappush(self.buy_orders, (-order.price, order))
         else:
@@ -32,7 +32,7 @@ class OrderBook:
                 return True
         return False
 
-    def cleanup_expired_orders(self):
+    def cleanup_expired_orders(self) -> None:
         current_time = datetime.now()
 
         self.buy_orders = [(price, order) for price, order in self.buy_orders if order.timestamp is None or order.timestamp > current_time]
